@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+
+  nifi:
+    image: "apache/nifi:1.25.0"
+    hostname: nifi
+    ports:
+      - 8443:8443
+    networks:    # Add network configuration for nifi service
+      - mynetwork
+    environment:
+      - SINGLE_USER_CREDENTIALS_USERNAME=admin
+      - SINGLE_USER_CREDENTIALS_PASSWORD=ctsBtRBKHRAx69EqUghvvgEvjnaLjFEB
+
+  nifi-registry:
+    image: "apache/nifi-registry:1.25.0"
+    hostname: nifiregistry
+    ports:
+      - 18080:18080
+    networks:    # Add network configuration for nifi-registry service
+      - mynetwork
+
+
+networks:
+  mynetwork:    # Define a network bridge with default driver
+    driver: bridge
